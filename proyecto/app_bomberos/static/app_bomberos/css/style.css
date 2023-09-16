@@ -1,0 +1,50 @@
+/* Estilos para el encabezado */
+header {
+    background-color: rgb(178, 29, 29);
+    color: #fff;
+    position: relative;
+    padding: 0 2rem;
+}
+
+header h1 {
+    margin: 0;
+}
+
+/* Estilos para la navegación */
+
+
+
+/* Estilos para el pie de página */
+
+
+
+/* Pie de pagina */
+
+footer {
+    text-align: center;
+    padding: 3px;
+    background-color: rgb(178, 29, 29);
+    color: white;
+    display: block;
+  }
+
+
+
+
+
+  /* Estilos para el contenido de la página de inicio */
+.contenido-principal {
+    text-align: center; /* Centrar el contenido horizontalmente */
+    margin-top: 50px;   /* Espacio superior para centrar verticalmente */
+}
+
+.contenido-principal h2 {
+    font-size: 24px;    /* Tamaño de fuente del título h2 */
+}
+
+.contenido-principal p {
+    font-size: 16px;    /* Tamaño de fuente del párrafo p */
+}
+
+
+
