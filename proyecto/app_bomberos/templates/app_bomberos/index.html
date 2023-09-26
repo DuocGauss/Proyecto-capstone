@@ -3,8 +3,49 @@
 {% block title %}Página de Inicio{% endblock %}
 
 {% block content %}
-<div class="contenido-principal">
-    <h2>Bienvenido a la página de inicio</h2>
-    <p>Este es el contenido de la página de inicio.</p>
+
+{% if messages %}
+
+    {% for msg in messages %}
+       <script>
+           Swal.fire({
+           title: 'Exito!',
+           text: '{{msg}}',
+           icon: 'success',
+           confirmButtonText: 'Aceptar',
+           confirmButtonColor: 'Green'
+           }) 
+       </script>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<div class="contenido-principal">   
+        <div class="row" >
+           
+           {% for v in obtener %}
+                   <div class="col-md-3">
+                     <div class="card border-warning mb-3" style="width: 100%; margin: 5px 5px;">
+                       <a href="{%url 'detail_vehiculo' v.id%}">
+                     <img class="card-img-top" src="{{v.imagen.url}}" alt=""></a>
+                      <div class="card-body" style="text-align: center;">
+                        <p class="card-title">{{v.patente}}</p>
+                        <p class="card-text"><ion-icon name="ticket-outline"></ion-icon> {{v.tipo_de_vehiculo}}</p>
+                     </div>
+                      </div>
+                      </div>
+                     
+                 {% endfor %}
+                
+                    
+                 
+             </div>
+             
+         </div>
+     
+         </div>
+         </div>
+
+
 </div>
 {% endblock %}

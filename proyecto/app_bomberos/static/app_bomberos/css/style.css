@@ -25,8 +25,9 @@ footer {
     padding: 3px;
     background-color: rgb(178, 29, 29);
     color: white;
-    display: block;
-  }
+    width: 100%;
+}
+
 
 
 
@@ -47,4 +48,9 @@ footer {
 }
 
 
+/* Anula el estilo de las listas no ordenadas */
+ul {
+    list-style: none; /* Elimina las viñetas */
+    padding-left: 0;  /* Elimina el espacio izquierdo predeterminado */
+}
 

@@ -1,0 +1,46 @@
+{% extends 'app_bomberos/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <img class="img-thumbnail img-fluid" src="{{ v.imagen.url }}" alt="Vehículo">
+        </div>
+        <div class="col-md-8">
+            <h2>{{ v.tipo_de_vehiculo }}</h2>
+            <p>Patente: {{ v.patente }}</p>
+            <!-- Otros detalles del vehículo -->
+        
+
+    <h3>Historial de Mantenimiento</h3>
+    <ul>
+        {% for mantenimiento in v.mantencionvehiculo_set.all %}
+        <li>
+            <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#detalleMantencion{{ mantenimiento.id }}">
+                Mantenimiento del {{ mantenimiento.fecha }}
+            </button>
+            <div id="detalleMantencion{{ mantenimiento.id }}" class="collapse">
+                <p>Kilometraje: {{ mantenimiento.kilometraje }}</p>
+                <p>Número de Motor: {{ mantenimiento.numero_motor }}</p>
+                <!-- Otros detalles de mantenimiento -->
+            </div>
+        </li>
+        {% empty %}
+        <li>No hay registros de mantenimiento para este vehículo.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Formulario de Mantenimiento -->
+    <h3>Registrar Mantenimiento</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form_mantencion.as_p }}
+        <button type="submit" class="btn btn-primary">Guardar Mantenimiento</button>
+    </form>
+    <br>
+</div>
+</div>
+</div>
+
+{% endblock content %}
