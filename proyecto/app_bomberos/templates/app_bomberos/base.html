@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Popper.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -16,7 +17,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <title>{% block title %}Sitio Web{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'app_bomberos/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'app_bomberos/css/estilo.css' %}">
 
 </head>
 <body>
@@ -30,18 +31,54 @@
                   </button>
                   <a class="navbar-brand" href="{% url 'index' %}">Home</a>
               </ul>
-
+              {% if user.is_staff %}
               <ul class="navbar-nav mr-right">
                 <li class="nav-item active">
                   <a class="nav-link" href="{% url 'gestion_vehiculos' %}">Gestión Vehiculos</a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link" href="#">Registrarse</a>
+                    <a class="nav-link" href="{% url 'compañia' %}">Agregar Compañías</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Iniciar sesión</a>
+                    <a class="nav-link" href="{% url 'register_m' %}">Registrar usuario</a>
+                </li>
+                {%endif%}
+                <ul class="navbar-nav mr-right">
+                  {% if user.is_authenticated %}
+                  <li class="nav-item active ">
+                      <a class="nav-link" href="#" onclick="confirmLogout()">
+                          Cerrar Sesión
+                      </a>
                   </li>
-                </ul>
+                <ul class="navbar-nav mr-right">
+                    {% if user_role == 'capitan' %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Estado de carros</a>
+                    </li>
+                    {% endif %}
+                    {% if user_role == 'mecanico' and not user.is_superuser %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{%url 'historial_mantenciones'%}">Historial de mantenciones</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Estado de carros</a>
+                    </li>
+                    {% endif %}
+                    {% if user_role == 'comandante' and not user.is_superuser %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{%url 'historial_mantenciones'%}">Historial de mantenciones</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Estado de carros</a>
+                    </li>
+                    {% endif %}
+                  {% else %}
+                  <li class="nav-item active">
+                      <a class="nav-link" href="{% url 'login_custom' %}">Iniciar sesión</a>
+                  </li>
+                  {% endif %}
+              </ul>
+              </ul>              
             </div>
           </nav>
     </header>
@@ -59,7 +96,24 @@
           <p>Author: Gustavo Martínez</p>
           <p><a href="/">gu.martinezb@duocuc.cl</a></p>
       </footer>
-
+ <!-- JavaScript para la confirmación de cierre de sesión -->
+ <script>
+    function confirmLogout() {
+        Swal.fire({
+            title: '¿Cerrar Sesión?',
+            text: '¿Estás seguro de que deseas cerrar sesión?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: 'Red'
+        }).then(function (result) {
+            if (result.isConfirmed) {
+                window.location.href = "{% url 'logout_custom' %}";
+            }
+        });
+    }
+</script>
 
 </body>
 </html>

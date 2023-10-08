@@ -1,18 +1,30 @@
 {% extends 'app_bomberos/base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Mantención{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-sm-4">
             <img class="img-thumbnail img-fluid" src="{{ v.imagen.url }}" alt="Vehículo">
+            <h2>{{ v.modelo }}</h2>
+            <!-- Otros detalles del vehículo -->
+            <p><strong>Clave:</strong> {{ v.clave }}</p>
+            <p><strong>Patente:</strong> {{ v.patente }}</p>
+            <p><strong>Tipo de vehículo:</strong> {{ v.tipo_vehiculo }}</p>
+            <p><strong>Marca:</strong> {{ v.marca }}</p>
+            <p><strong>Año:</strong> {{ v.año }}</p>
+            <p><strong>N° Motor:</strong> {{ v.nro_motor }}</p>
+            <p><strong>N° Chasis:</strong> {{ v.nro_chasis }}</p>
+            <p><strong>Compañia:</strong> {{ v.compañia }}</p>
         </div>
-        <div class="col-md-8">
-            <h2>{{ v.tipo_de_vehiculo }}</h2>
-            <p>Patente: {{ v.patente }}</p>
+        
+        
             <!-- Otros detalles del vehículo -->
         
-
+<!--
     <h3>Historial de Mantenimiento</h3>
     <ul>
         {% for mantenimiento in v.mantencionvehiculo_set.all %}
@@ -22,25 +34,121 @@
             </button>
             <div id="detalleMantencion{{ mantenimiento.id }}" class="collapse">
                 <p>Kilometraje: {{ mantenimiento.kilometraje }}</p>
-                <p>Número de Motor: {{ mantenimiento.numero_motor }}</p>
-                <!-- Otros detalles de mantenimiento -->
+                <p>Número de Motor: {{ mantenimiento.nro_motor }}</p>
             </div>
         </li>
         {% empty %}
         <li>No hay registros de mantenimiento para este vehículo.</li>
         {% endfor %}
     </ul>
-
+      -->
+<div class="col-sm-6">
     <!-- Formulario de Mantenimiento -->
     <h3>Registrar Mantenimiento</h3>
     <form method="post">
         {% csrf_token %}
-        {{ form_mantencion.as_p }}
+
+        {{ form_mantencion.tipo_mantencion|as_crispy_field }}
+
+        <div id="campos_preventiva" style="display: none;">
+            {# Campos para la mantención preventiva #}
+            {{ form_mantencion.fecha_preventiva|as_crispy_field }}
+            {{ form_mantencion.hora_entrada_preventiva|as_crispy_field }}
+            {{ form_mantencion.hora_salida_preventiva|as_crispy_field }}
+            {{ form_mantencion.estado_combustible|as_crispy_field }}
+            {{ form_mantencion.estado_motor_funcionamiento|as_crispy_field }}
+            {{ form_mantencion.estado_filtro_aire|as_crispy_field }}
+            {{ form_mantencion.estado_nivel_aceite_motor|as_crispy_field }}
+            {{ form_mantencion.estado_tablero_instrumentos|as_crispy_field }}
+            {{ form_mantencion.estado_nivel_refrigerante|as_crispy_field }}
+            {{ form_mantencion.estado_nivel_aceite_transmision|as_crispy_field }}
+            {{ form_mantencion.estado_fugas_aceite_aire|as_crispy_field }}
+            {{ form_mantencion.estado_frenos_servicio_funcionamiento|as_crispy_field }}
+            {{ form_mantencion.estado_fugas_aire|as_crispy_field }}
+            {{ form_mantencion.estado_frenos_estacionamiento|as_crispy_field }}
+            {{ form_mantencion.estado_nivel_liquido_hidraulico|as_crispy_field }}
+            {{ form_mantencion.estado_liquido_juego_direccion|as_crispy_field }}
+            {{ form_mantencion.estado_liquido_fugas|as_crispy_field }}
+            {{ form_mantencion.estado_parabrisas_ventanas|as_crispy_field }}
+            {{ form_mantencion.estado_carroceria|as_crispy_field }}
+            {{ form_mantencion.estado_luces_altas_bajas|as_crispy_field }}
+            {{ form_mantencion.estado_luces_estacionamiento_viraje|as_crispy_field }}
+            {{ form_mantencion.estado_luces_traseras_frenos|as_crispy_field }}
+            {{ form_mantencion.estado_luces_reserva_alarma_retroceso|as_crispy_field }}
+            {{ form_mantencion.estado_bornes_terminales_bateria|as_crispy_field }}
+            {{ form_mantencion.estado_presion_desgaste_neumaticos|as_crispy_field }}
+            {{ form_mantencion.estado_llantas|as_crispy_field }}
+            {{ form_mantencion.estado_sistemas_sonoros_emergencia|as_crispy_field }}
+            {{ form_mantencion.estado_luces_emergencia|as_crispy_field }}
+            {{ form_mantencion.estado_luces_tablero_bomba|as_crispy_field }}
+            {{ form_mantencion.estado_pto_enganche_bomba|as_crispy_field }}
+            {{ form_mantencion.estado_lecturas_manometros_manovacuometros|as_crispy_field }}
+            {{ form_mantencion.estado_fugas_general_funcionamiento_bomba|as_crispy_field }}
+            {{ form_mantencion.observaciones_preventiva|as_crispy_field }}
+        </div>
+
+        <div id="campos_correctiva" style="display: none;">
+            {# Campos para la mantención correctiva #}
+            {{ form_mantencion.fecha_correctiva|as_crispy_field }}
+            {{ form_mantencion.hora_entrada_correctiva|as_crispy_field }}
+            {{ form_mantencion.hora_salida_correctiva|as_crispy_field }}
+            {{ form_mantencion.observaciones_correctiva|as_crispy_field }}
+        </div>
+
+        <div id="campos_externa" style="display: none;">
+            {# Campos para la mantención externa #}
+            {{ form_mantencion.fecha_externa|as_crispy_field }}
+            {{ form_mantencion.observaciones_externa|as_crispy_field }}
+        </div>
+        
         <button type="submit" class="btn btn-primary">Guardar Mantenimiento</button>
     </form>
-    <br>
+    <br> 
+    
+<script>
+    const tipoMantencionField = document.querySelector('#id_tipo_mantencion');
+const camposPreventiva = document.querySelector('#campos_preventiva');
+const camposCorrectiva = document.querySelector('#campos_correctiva');
+const camposExterna = document.querySelector('#campos_externa');
+
+tipoMantencionField.addEventListener('change', function () {
+  const tipoMantencion = tipoMantencionField.value;
+
+  console.log("Tipo de Mantención:", tipoMantencion);
+
+  // Mostrar u ocultar campos según la selección
+  if (tipoMantencion === 'Preventiva') {
+    camposPreventiva.style.display = 'block';
+    camposCorrectiva.style.display = 'none';
+    camposExterna.style.display = 'none';
+  } else if (tipoMantencion === 'Correctiva') {
+    camposPreventiva.style.display = 'none';
+    camposCorrectiva.style.display = 'block';
+    camposExterna.style.display = 'none';
+  } else if (tipoMantencion === 'Externa') {
+    camposPreventiva.style.display = 'none';
+    camposCorrectiva.style.display = 'none';
+    camposExterna.style.display = 'block';
+  } else {
+    camposPreventiva.style.display = 'none';
+    camposCorrectiva.style.display = 'none';
+    camposExterna.style.display = 'none';
+  }
+});
+
+// Llama a la función inicialmente para manejar la visibilidad inicial
+tipoMantencionField.dispatchEvent(new Event('change'));
+
+
+</script>
+    
 </div>
 </div>
 </div>
+
+
+
+
+
 
 {% endblock content %}

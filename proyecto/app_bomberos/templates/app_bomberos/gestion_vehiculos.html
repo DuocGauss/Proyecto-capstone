@@ -44,23 +44,35 @@
 <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-10">
-        <h1 style="text-align: center;">Lista</h1>
+        <h1 style="text-align: center;">Gestion de carros</h1>
         <div class="table-responsive">
           <table class="table table-bordered">
             <thead class="thead-dark">
               <tr>
+                <th>Clave</th>
                 <th>Patente</th>
                 <th>Tipo de vehículo</th>
-                <th>Imagen</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Año</th>
+                <th>N° Motor</th>
+                <th>N° Chasis</th>
+                <th>Compañia</th>
                 <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
               {% for v in obtener %}
               <tr>
+                <td>{{ v.clave }}</td>
                 <td>{{ v.patente }}</td>
-                <td>{{ v.tipo_de_vehiculo }}</td>
-                <td>{{ v.imagen }}</td>
+                <td>{{ v.tipo_vehiculo }}</td>
+                <td>{{ v.marca }}</td>
+                <td>{{ v.modelo }}</td>
+                <td>{{ v.año }}</td>
+                <td>{{ v.nro_motor }}</td>
+                <td>{{ v.nro_chasis }}</td>
+                <td>{{ v.compañia }}</td>
                 <td>
                   <a role="button" class="btn btn-warning btn-lg" href="{% url 'update_vehiculo' v.id %}">📋</a>
                   <a role="button" class="btn btn-danger btn-lg text-white" onclick="AlertaEliminar({{v.id}})">🗑</a>

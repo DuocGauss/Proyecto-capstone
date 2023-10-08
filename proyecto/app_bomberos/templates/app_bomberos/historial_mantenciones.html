@@ -1,0 +1,124 @@
+{% extends "app_bomberos/base.html" %}
+
+{% block title %}Historial de mantenciones{% endblock %}
+
+{% block content %}
+
+    
+
+    <div class="container-fluid">
+
+
+
+        <div class="row">
+            <div id="panel-cliente" class="col-sm-2">
+                <ul class="nav flex-column">
+                    <li>
+                        <h3 style="border-bottom: 1px solid #acacac;">Tipos de Mantenciones</h3>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "historial_mantenciones" %}">M. Preventivo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "historial_correctiva" %}">M. Correctivo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "historial_externo" %}">M. Externo</a>
+                    </li>
+                   
+                </ul>
+            </div>
+
+
+    <div class="col-md-10"> 
+        <h3>Historial de Mantenimiento Preventivo</h3>
+    <ul>
+        {% for mantenimiento in obtener %}
+        <li>
+            <button type="button" class="btn btn-link " data-toggle="collapse" data-target="#detalleMantencion{{ mantenimiento.id }}">
+                Mantenimiento del {{ mantenimiento.fecha_preventiva }} a las {{ mantenimiento.hora_entrada_preventiva }} Para carro clave: {{ mantenimiento.id_autobombero.clave }} Compañia: {{mantenimiento.id_autobombero.compañia}}
+            </button>
+            <div id="detalleMantencion{{ mantenimiento.id }}" class="collapse">
+                <p><strong>Hora de entrada:</strong> {{ mantenimiento.hora_entrada_preventiva }}</p>
+                <p><strong>Hora de salida:</strong> {{ mantenimiento.hora_salida_preventiva }}</p>
+                <h5 class="collapse-toggle btn btn-outline-danger btn-lg btn-block" data-toggle="collapse" data-target="#seccionMotor{{ mantenimiento.id }}">Motor</h5>
+                <div id="seccionMotor{{ mantenimiento.id }}" class="collapse">
+                    <p><strong>Estado nivel de combustible:</strong> {{ mantenimiento.estado_combustible }}</p>
+                    <p><strong>Estado del funcionamiento del motor:</strong> {{ mantenimiento.estado_motor_funcionamiento }}</p>
+                    <p><strong>Estado filtros de aire:</strong> {{ mantenimiento.estado_filtro_aire }}</p>
+                    <p><strong>Estado nivel del aceite en el motor:</strong> {{ mantenimiento.estado_nivel_aceite_motor }}</p>
+                    <p><strong>Estado funcionamiento tablero de instrumentos:</strong> {{ mantenimiento.estado_tablero_instrumentos }}</p>
+                    <p><strong>Estado nivel del refrigerante:</strong> {{ mantenimiento.estado_nivel_refrigerante }}</p>
+                </div>
+
+                <h5 class="collapse-toggle btn btn-outline-danger btn-lg btn-block" data-toggle="collapse" data-target="#seccionTransmision{{ mantenimiento.id }}">Transmisión y Tren Motriz</h5>
+                <div id="seccionTransmision{{ mantenimiento.id }}" class="collapse">
+                    <p><strong>Estado nivel de aceite(transmisión automática):</strong> {{ mantenimiento.estado_nivel_aceite_transmision }}</p>
+                    <p><strong>Estado fugas de aceite y/o aire:</strong> {{ mantenimiento.estado_fugas_aceite_aire }}</p>
+                </div>
+
+                <h5 class="collapse-toggle btn btn-outline-danger btn-lg btn-block" data-toggle="collapse" data-target="#seccionFrenos{{ mantenimiento.id }}">Sistema de Frenos</h5>
+                <div id="seccionFrenos{{ mantenimiento.id }}" class="collapse">
+                    <p><strong>Estado frenos de servicio y funcionamiento:</strong> {{ mantenimiento.estado_frenos_servicio_funcionamiento }}</p>
+                    <p><strong>Estado fugas de aire:</strong> {{ mantenimiento.estado_fugas_aire }}</p>
+                    <p><strong>Estado funcionamiento de frenos de estacionamiento:</strong> {{ mantenimiento.estado_frenos_estacionamiento }}</p>
+                </div>
+
+                <h5 class="collapse-toggle btn btn-outline-danger btn-lg btn-block" data-toggle="collapse" data-target="#seccionDireccion{{ mantenimiento.id }}">Sistema de Dirección</h5>
+                <div id="seccionDireccion{{ mantenimiento.id }}" class="collapse">
+                    <p><strong>Estado nivel liquido hidráulico:</strong> {{ mantenimiento.estado_nivel_liquido_hidraulico }}</p>
+                    <p><strong>Estado juego de dirección:</strong> {{ mantenimiento.estado_liquido_juego_direccion }}</p>
+                    <p><strong>Estado fugas:</strong> {{ mantenimiento.estado_liquido_fugas }}</p>
+                </div>
+
+                <h5 class="collapse-toggle btn btn-outline-danger btn-lg btn-block" data-toggle="collapse" data-target="#seccionChasis{{ mantenimiento.id }}">Chasis y Carrocería</h5>
+                <div id="seccionChasis{{ mantenimiento.id }}" class="collapse">
+                    <p><strong>Estado parabrisas y ventanas:</strong> {{ mantenimiento.estado_parabrisas_ventanas }}</p>
+                    <p><strong>Estado carrocería:</strong> {{ mantenimiento.estado_carroceria }}</p>
+                </div>
+
+                <h5 class="collapse-toggle btn btn-outline-danger btn-lg btn-block" data-toggle="collapse" data-target="#seccionElectrico{{ mantenimiento.id }}">Sistema Eléctrico</h5>
+                <div id="seccionElectrico{{ mantenimiento.id }}" class="collapse">
+                    <p><strong>Estado luces altas y bajas:</strong> {{ mantenimiento.estado_luces_altas_bajas }}</p>
+                    <p><strong>Estado luces de estacionamiento y viraje:</strong> {{ mantenimiento.estado_luces_estacionamiento_viraje }}</p>
+                    <p><strong>Estado luces traseras y frenos:</strong> {{ mantenimiento.estado_luces_traseras_frenos }}</p>
+                    <p><strong>Estado luces de reversa y alarma de retroceso:</strong> {{ mantenimiento.estado_luces_reserva_alarma_retroceso }}</p>
+                    <p><strong>Estado bornes, terminales de bateria:</strong> {{ mantenimiento.estado_bornes_terminales_bateria }}</p>
+                </div>
+
+                <h5 class="collapse-toggle btn btn-outline-danger btn-lg btn-block" data-toggle="collapse" data-target="#seccionEjes{{ mantenimiento.id }}">Ejes y Ruedas</h5>
+                <div id="seccionEjes{{ mantenimiento.id }}" class="collapse">
+                    <p><strong>Estado presión y desgaste de neumáticos:</strong> {{ mantenimiento.estado_presion_desgaste_neumaticos }}</p>
+                    <p><strong>Estado llantas:</strong> {{ mantenimiento.estado_llantas }}</p>
+                </div>
+
+                <h5 class="collapse-toggle btn btn-outline-danger btn-lg btn-block" data-toggle="collapse" data-target="#seccionAlarmas{{ mantenimiento.id }}">Sistema Alarmas y Luces Emergencia General</h5>
+                <div id="seccionAlarmas{{ mantenimiento.id }}" class="collapse">
+                    <p><strong>Estado sistemas sonoros de emergencia:</strong> {{ mantenimiento.estado_sistemas_sonoros_emergencia }}</p>
+                    <p><strong>Estado luces de emergencia(balizas, estroboscópicos y giratorios):</strong> {{ mantenimiento.estado_luces_emergencia }}</p>
+                    <p><strong>Estado luces tablero bomba(testigos de emergencia y niveles):</strong> {{ mantenimiento.estado_luces_tablero_bomba }}</p>
+                </div>
+
+                <h5 class="collapse-toggle btn btn-outline-danger btn-lg btn-block" data-toggle="collapse" data-target="#seccionBomba{{ mantenimiento.id }}">Bomba Incendio (Cuerpo Bomba)</h5>
+                <div id="seccionBomba{{ mantenimiento.id }}" class="collapse">
+                    <p><strong>Estado de PTO enganche bomba:</strong> {{ mantenimiento.estado_pto_enganche_bomba }}</p>
+                    <p><strong>Estado lecturas manómetros y manovacuometros:</strong> {{ mantenimiento.estado_lecturas_manometros_manovacuometros }}</p>
+                    <p><strong>Estado fugas general y funcionamiento bomba:</strong> {{ mantenimiento.estado_fugas_general_funcionamiento_bomba }}</p>
+                </div>
+
+                <h5 class="collapse-toggle btn btn-outline-danger btn-lg btn-block" data-toggle="collapse" data-target="#seccionObservacion{{ mantenimiento.id }}">Observaciones</h5>
+                <div id="seccionObservacion{{ mantenimiento.id }}" class="collapse">
+                    <p><strong>Observaciones:</strong> {{ mantenimiento.observaciones_preventiva }}</p>
+                </div>
+            </div>
+        </li>
+        {% empty %}
+        <li>No hay registros de mantenimiento para este vehículo.</li>
+        {% endfor %}
+    </ul>
+
+</div>
+</div>
+</div>
+   
+{% endblock %}

@@ -12,9 +12,10 @@
     {% csrf_token %}
     <div class="alert alert-danger" role="alert">
         <h3>¿Seguro que deseas eliminar este vehículo?</h3>
-        <p class="pt-2"><strong>Código:</strong> {{v.id}}</p>
+        <p class="pt-2"><strong>Código:</strong> {{v.clave}}</p>
         <p><strong>Patente:</strong> {{v.patente}}</p>
-        <p><strong>Tipo de vehículo:</strong> {{v.tipo_de_vehiculo}}</p>
+        <p><strong>Modelo:</strong> {{v.modelo}}</p>
+        <p><strong>Compañia:</strong> {{v.compañia}}</p>
         <p><strong>Imagen:</strong> {{v.imagen}}</p>
         <div class="pt-3">
          <input type="submit" value="Eliminar" class="btn btn-danger btn-lg text-white">

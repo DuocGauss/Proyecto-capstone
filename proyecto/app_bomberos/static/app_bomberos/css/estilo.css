@@ -23,7 +23,7 @@ header h1 {
 footer {
     text-align: center;
     padding: 3px;
-    background-color: rgb(178, 29, 29);
+    background-color: rgb(178, 29, 29);;
     color: white;
     width: 100%;
 }
@@ -53,4 +53,36 @@ ul {
     list-style: none; /* Elimina las viñetas */
     padding-left: 0;  /* Elimina el espacio izquierdo predeterminado */
 }
+
+
+
+#panel-cliente ul li a{
+    color: white;
+    margin-top: 1px;
+    /* background-color: #e4e4e4; */
+    background-color:#000000; 
+
+}
+
+#panel-cliente ul li a:hover{
+    
+    background-color:  #d80707;
+    
+}
+
+
+
+/* CSS personalizado para ajustar el tamaño de las imágenes del carrusel */
+.custom-image-size {
+    max-width: 100%; /* Ajustar el ancho máximo de la imagen al tamaño del contenedor */
+    max-height: 600px; 
+    margin: 0 auto; /* Centrar la imagen horizontalmente en el contenedor */
+    display: block; /* Hacer que la imagen sea un elemento de bloque para centrarla */
+}
+
+.carousel {
+    margin-bottom: 40px; /* Ajusta el valor según la separación deseada entre el carrusel y el footer */
+}
+
+
 

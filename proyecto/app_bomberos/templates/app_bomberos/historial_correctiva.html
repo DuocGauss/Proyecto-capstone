@@ -1,0 +1,61 @@
+{% extends "app_bomberos/base.html" %}
+
+{% block title %}Historial de mantenciones{% endblock %}
+
+{% block content %}
+
+    
+
+    <div class="container-fluid">
+
+
+
+        <div class="row">
+            <div id="panel-cliente" class="col-sm-2">
+                <ul class="nav flex-column">
+                    <li>
+                        <h3 style="border-bottom: 1px solid #acacac;">Tipos de Mantenciones</h3>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "historial_mantenciones" %}">M. Preventivo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "historial_correctiva" %}">M. Correctivo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "historial_externo" %}">M. Externo</a>
+                    </li>
+                   
+                </ul>
+            </div>
+
+
+    <div class="col-md-10"> 
+        <h3>Historial de Mantenimiento Correctivo</h3>
+    <ul>
+        {% for mantenimiento in obtener %}
+        <li>
+            <button type="button" class="btn btn-link " data-toggle="collapse" data-target="#detalleMantencion{{ mantenimiento.id }}">
+                Mantenimiento del {{ mantenimiento.fecha_correctiva }} a las {{ mantenimiento.hora_entrada_correctiva }} Para carro clave: {{ mantenimiento.id_autobombero.clave }} Compañia: {{mantenimiento.id_autobombero.compañia}}
+            </button>
+            <div id="detalleMantencion{{ mantenimiento.id }}" class="collapse">
+                <p><strong>Hora de entrada:</strong> {{ mantenimiento.hora_entrada_correctiva }}</p>
+                <p><strong>Hora de salida:</strong> {{ mantenimiento.hora_salida_correctiva }}</p>
+
+                <h5 class="collapse-toggle btn btn-outline-danger btn-lg btn-block" data-toggle="collapse" data-target="#seccionObservacion{{ mantenimiento.id }}">Observaciones</h5>
+                <div id="seccionObservacion{{ mantenimiento.id }}" class="collapse">
+                    <p><strong>Observaciones:</strong> {{ mantenimiento.observaciones_correctiva }}</p>
+                </div>
+            </div>
+        </li>
+        {% empty %}
+        <li>No hay registros de mantenimiento para este vehículo.</li>
+        {% endfor %}
+    </ul>
+
+</div>
+</div>
+</div>
+   
+{% endblock %}
+
