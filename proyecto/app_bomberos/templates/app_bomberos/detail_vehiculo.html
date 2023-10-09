@@ -52,9 +52,11 @@
 
         <div id="campos_preventiva" style="display: none;">
             {# Campos para la mantención preventiva #}
-            {{ form_mantencion.fecha_preventiva|as_crispy_field }}
-            {{ form_mantencion.hora_entrada_preventiva|as_crispy_field }}
-            {{ form_mantencion.hora_salida_preventiva|as_crispy_field }}
+            {{ form_mantencion.fecha_preventiva_ingreso|as_crispy_field }}
+            {{ form_mantencion.fecha_preventiva_entrega|as_crispy_field }}
+            {{ form_mantencion.hora_motor_preventiva|as_crispy_field }}
+            {{ form_mantencion.hora_bomba_preventiva|as_crispy_field }}
+            {{ form_mantencion.kilometraje|as_crispy_field }}
             {{ form_mantencion.estado_combustible|as_crispy_field }}
             {{ form_mantencion.estado_motor_funcionamiento|as_crispy_field }}
             {{ form_mantencion.estado_filtro_aire|as_crispy_field }}
@@ -90,8 +92,8 @@
         <div id="campos_correctiva" style="display: none;">
             {# Campos para la mantención correctiva #}
             {{ form_mantencion.fecha_correctiva|as_crispy_field }}
-            {{ form_mantencion.hora_entrada_correctiva|as_crispy_field }}
-            {{ form_mantencion.hora_salida_correctiva|as_crispy_field }}
+            {{ form_mantencion.hora_motor_correctiva|as_crispy_field }}
+            {{ form_mantencion.hora_bomba_correctiva|as_crispy_field }}
             {{ form_mantencion.observaciones_correctiva|as_crispy_field }}
         </div>
 

@@ -36,12 +36,12 @@
         {% for mantenimiento in obtener %}
         <li>
             <button type="button" class="btn btn-link " data-toggle="collapse" data-target="#detalleMantencion{{ mantenimiento.id }}">
-                Mantenimiento del {{ mantenimiento.fecha_correctiva }} a las {{ mantenimiento.hora_entrada_correctiva }} Para carro clave: {{ mantenimiento.id_autobombero.clave }} Compañia: {{mantenimiento.id_autobombero.compañia}}
+                Mantenimiento del {{ mantenimiento.fecha_correctiva }} Para carro clave: {{ mantenimiento.id_autobombero.clave }} Compañia: {{mantenimiento.id_autobombero.compañia}}
             </button>
             <div id="detalleMantencion{{ mantenimiento.id }}" class="collapse">
-                <p><strong>Hora de entrada:</strong> {{ mantenimiento.hora_entrada_correctiva }}</p>
-                <p><strong>Hora de salida:</strong> {{ mantenimiento.hora_salida_correctiva }}</p>
-
+                <p><strong>Fecha de mantención:</strong> {{ mantenimiento.fecha_correctiva }}</p>
+                <p><strong>Hora motor:</strong> {{ mantenimiento.hora_motor_correctiva }}</p>
+                <p><strong>Hora bomba:</strong> {{ mantenimiento.hora_bomba_correctiva }}</p>
                 <h5 class="collapse-toggle btn btn-outline-danger btn-lg btn-block" data-toggle="collapse" data-target="#seccionObservacion{{ mantenimiento.id }}">Observaciones</h5>
                 <div id="seccionObservacion{{ mantenimiento.id }}" class="collapse">
                     <p><strong>Observaciones:</strong> {{ mantenimiento.observaciones_correctiva }}</p>

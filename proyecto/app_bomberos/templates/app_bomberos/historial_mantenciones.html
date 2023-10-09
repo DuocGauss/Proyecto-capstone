@@ -36,11 +36,14 @@
         {% for mantenimiento in obtener %}
         <li>
             <button type="button" class="btn btn-link " data-toggle="collapse" data-target="#detalleMantencion{{ mantenimiento.id }}">
-                Mantenimiento del {{ mantenimiento.fecha_preventiva }} a las {{ mantenimiento.hora_entrada_preventiva }} Para carro clave: {{ mantenimiento.id_autobombero.clave }} Compañia: {{mantenimiento.id_autobombero.compañia}}
+                Mantenimiento del {{ mantenimiento.fecha_preventiva_ingreso }} Para carro clave: {{ mantenimiento.id_autobombero.clave }} Compañia: {{mantenimiento.id_autobombero.compañia}}
             </button>
             <div id="detalleMantencion{{ mantenimiento.id }}" class="collapse">
-                <p><strong>Hora de entrada:</strong> {{ mantenimiento.hora_entrada_preventiva }}</p>
-                <p><strong>Hora de salida:</strong> {{ mantenimiento.hora_salida_preventiva }}</p>
+                <p><strong>Fecha de ingreso:</strong> {{ mantenimiento.fecha_preventiva_ingreso }}</p>
+                <p><strong>Fecha de salida:</strong> {{ mantenimiento.fecha_preventiva_entrega }}</p>
+                <p><strong>Hora motor:</strong> {{ mantenimiento.hora_motor_preventiva }}</p>
+                <p><strong>Hora bomba:</strong> {{ mantenimiento.hora_bomba_preventiva }}</p>
+                <p><strong>Kilometraje:</strong> {{ mantenimiento.kilometraje }}</p>
                 <h5 class="collapse-toggle btn btn-outline-danger btn-lg btn-block" data-toggle="collapse" data-target="#seccionMotor{{ mantenimiento.id }}">Motor</h5>
                 <div id="seccionMotor{{ mantenimiento.id }}" class="collapse">
                     <p><strong>Estado nivel de combustible:</strong> {{ mantenimiento.estado_combustible }}</p>

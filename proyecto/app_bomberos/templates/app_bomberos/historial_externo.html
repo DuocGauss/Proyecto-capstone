@@ -39,9 +39,7 @@
                 Mantenimiento del {{ mantenimiento.fecha_externa }} Para carro clave: {{ mantenimiento.id_autobombero.clave }} Compañia: {{mantenimiento.id_autobombero.compañia}}
             </button>
             <div id="detalleMantencion{{ mantenimiento.id }}" class="collapse">
-                <p><strong>Hora de entrada:</strong> N/A</p>
-                <p><strong>Hora de salida:</strong> N/A</p>
-
+                <p><strong>Fecha de entrega:</strong> {{ mantenimiento.fecha_externa }}</p>
                 <h5 class="collapse-toggle btn btn-outline-danger btn-lg btn-block" data-toggle="collapse" data-target="#seccionObservacion{{ mantenimiento.id }}">Observaciones</h5>
                 <div id="seccionObservacion{{ mantenimiento.id }}" class="collapse">
                     <p><strong>Observaciones:</strong> {{ mantenimiento.observaciones_externa }}</p>
